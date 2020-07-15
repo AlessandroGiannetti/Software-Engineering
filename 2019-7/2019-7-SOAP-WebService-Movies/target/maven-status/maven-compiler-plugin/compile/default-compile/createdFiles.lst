@@ -1,0 +1,9 @@
+it\sapienza\soap\webservice\movies\MovieMapAdapter.class
+it\sapienza\soap\webservice\movies\Movie.class
+it\sapienza\soap\webservice\movies\Server.class
+it\sapienza\soap\webservice\movies\WSInterface.class
+it\sapienza\soap\webservice\movies\Director.class
+it\sapienza\soap\webservice\movies\MovieAdapter.class
+it\sapienza\soap\webservice\movies\MovieMap.class
+it\sapienza\soap\webservice\movies\WSImpl.class
+it\sapienza\soap\webservice\movies\MovieImpl.class

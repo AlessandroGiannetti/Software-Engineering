@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://movies.webservice.soap.sapienza.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WSImplService" targetNamespace="http://movies.webservice.soap.sapienza.it/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://movies.webservice.soap.sapienza.it/" elementFormDefault="unqualified" targetNamespace="http://movies.webservice.soap.sapienza.it/" version="1.0">
+
+  <xs:element name="getDirector" type="tns:getDirector"/>
+
+  <xs:element name="getDirectorResponse" type="tns:getDirectorResponse"/>
+
+  <xs:element name="getMovies" type="tns:getMovies"/>
+
+  <xs:element name="getMoviesResponse" type="tns:getMoviesResponse"/>
+
+  <xs:complexType name="getDirector">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDirectorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:Director"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Director">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="yearOfBirth" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMovies">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getMoviesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:MovieMap"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MovieMap">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:Movie"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Movie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="directorID" type="xs:string"/>
+      <xs:element minOccurs="0" name="ID" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="year" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getDirectorResponse">
+    <wsdl:part element="tns:getDirectorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMoviesResponse">
+    <wsdl:part element="tns:getMoviesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDirector">
+    <wsdl:part element="tns:getDirector" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMovies">
+    <wsdl:part element="tns:getMovies" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WSInterface">
+    <wsdl:operation name="getDirector">
+      <wsdl:input message="tns:getDirector" name="getDirector">
+    </wsdl:input>
+      <wsdl:output message="tns:getDirectorResponse" name="getDirectorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovies">
+      <wsdl:input message="tns:getMovies" name="getMovies">
+    </wsdl:input>
+      <wsdl:output message="tns:getMoviesResponse" name="getMoviesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSImplServiceSoapBinding" type="tns:WSInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getDirector">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getDirector">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDirectorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovies">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMovies">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMoviesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSImplService">
+    <wsdl:port binding="tns:WSImplServiceSoapBinding" name="WSImplPort">
+      <soap:address location="http://localhost:8080/WSInterface"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,4 @@
+it\sapienza\soap\webservice\professors\Exam.class
+it\sapienza\soap\webservice\professors\Professor.class
+it\sapienza\soap\webservice\professors\ExamImpl.class
+it\sapienza\soap\webservice\professors\Server.class
