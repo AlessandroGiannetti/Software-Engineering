@@ -1,0 +1,4 @@
+it\sapienza\softeng\rest\api\Course.class
+it\sapienza\softeng\rest\api\Student.class
+it\sapienza\softeng\rest\api\CoursesRepository.class
+it\sapienza\softeng\rest\api\APIServer.class
