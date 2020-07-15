@@ -43,13 +43,14 @@ ENTRYPOINT ["java", "-cp", "4-SOAP-WebService-1.0.jar", "it.sapienza.softeng.soa
 2. docker build -t \<name\> **.**
 3. docker-compose up 
 
-**show iamges on docker**
+**show images on docker**
 1. docker images
 
 **show the container that are running:**
 1. docker ps
 
-IF multiple SERVICES on multiple container look *docker/JSM* folder AND *03B-JMSServant-microService*.
+# IF multiple SERVICES on multiple container 
+look *docker/JSM* folder AND *03B-JMSServant-microService*.
 we must modify the logical address like:
 * props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
 * props.setProperty(Context.PROVIDER_URL, "tcp://broker:61616");
