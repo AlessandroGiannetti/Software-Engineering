@@ -1,0 +1,9 @@
+it\sapienza\soap\webservice\professors\Professor.class
+it\sapienza\soap\webservice\professors\ExamImplService.class
+it\sapienza\client\professor\MainClass.class
+it\sapienza\soap\webservice\professors\GetDetails.class
+it\sapienza\soap\webservice\professors\GetDetailsResponse.class
+it\sapienza\client\professor\ProfessorListener.class
+it\sapienza\soap\webservice\professors\Exam.class
+it\sapienza\soap\webservice\professors\ObjectFactory.class
+it\sapienza\soap\webservice\professors\package-info.class
