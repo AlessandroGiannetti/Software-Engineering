@@ -1,0 +1,4 @@
+it\sapienza\soap\webservice\bank\Bank.class
+it\sapienza\soap\webservice\bank\Customer.class
+it\sapienza\soap\webservice\bank\BankImpl.class
+it\sapienza\soap\webservice\bank\Server.class

@@ -1,0 +1,12 @@
+it\sapienza\soap\webservice\bank\GetCustomersResponse.class
+it\sapienza\soap\webservice\bank\DetailsCustomer.class
+it\sapienza\soap\webservice\bank\AddCustomerResponse.class
+it\sapienza\soap\webservice\bank\GetCustomers.class
+it\sapienza\soap\webservice\bank\ObjectFactory.class
+it\sapienza\soap\webservice\bank\Customer.class
+it\sapienza\soap\webservice\bank\DetailsCustomerResponse.class
+it\sapienza\soap\webservice\bank\Bank.class
+it\sapienza\soap\webservice\bank\package-info.class
+it\sapienza\soap\client\bank\Client.class
+it\sapienza\soap\webservice\bank\AddCustomer.class
+it\sapienza\soap\webservice\bank\BankImplService.class

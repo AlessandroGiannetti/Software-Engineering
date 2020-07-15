@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://bank.webservice.soap.sapienza.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BankImplService" targetNamespace="http://bank.webservice.soap.sapienza.it/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bank.webservice.soap.sapienza.it/" elementFormDefault="unqualified" targetNamespace="http://bank.webservice.soap.sapienza.it/" version="1.0">
+
+  <xs:element name="addCustomer" type="tns:addCustomer"/>
+
+  <xs:element name="addCustomerResponse" type="tns:addCustomerResponse"/>
+
+  <xs:element name="detailsCustomer" type="tns:detailsCustomer"/>
+
+  <xs:element name="detailsCustomerResponse" type="tns:detailsCustomerResponse"/>
+
+  <xs:element name="getCustomers" type="tns:getCustomers"/>
+
+  <xs:element name="getCustomersResponse" type="tns:getCustomersResponse"/>
+
+  <xs:complexType name="detailsCustomer">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="detailsCustomerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCustomers">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getCustomersResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:customer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element name="bill" type="xs:double"/>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="surname" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:customer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addCustomerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="detailsCustomer">
+    <wsdl:part element="tns:detailsCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCustomerResponse">
+    <wsdl:part element="tns:addCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomers">
+    <wsdl:part element="tns:getCustomers" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="detailsCustomerResponse">
+    <wsdl:part element="tns:detailsCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomersResponse">
+    <wsdl:part element="tns:getCustomersResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCustomer">
+    <wsdl:part element="tns:addCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Bank">
+    <wsdl:operation name="detailsCustomer">
+      <wsdl:input message="tns:detailsCustomer" name="detailsCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:detailsCustomerResponse" name="detailsCustomerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomers">
+      <wsdl:input message="tns:getCustomers" name="getCustomers">
+    </wsdl:input>
+      <wsdl:output message="tns:getCustomersResponse" name="getCustomersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCustomer">
+      <wsdl:input message="tns:addCustomer" name="addCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:addCustomerResponse" name="addCustomerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BankImplServiceSoapBinding" type="tns:Bank">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="detailsCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="detailsCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="detailsCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCustomers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCustomersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BankImplService">
+    <wsdl:port binding="tns:BankImplServiceSoapBinding" name="BankImplPort">
+      <soap:address location="http://localhost:8080/bank"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
