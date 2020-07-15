@@ -65,9 +65,11 @@ ENTRYPOINT ["java", "-cp", "4-SOAP-WebService-1.0.jar", "it.sapienza.softeng.soa
 
 # IF multiple SERVICES on multiple container 
 look *docker/JSM* folder AND *03B-JMSServant-microService*.
+
 we must modify the logical address like:
-* props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
-* props.setProperty(Context.PROVIDER_URL, "tcp://broker:61616");
+* FROM props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
+* TO props.setProperty(Context.PROVIDER_URL, "tcp://broker:61616");
+
 and verify if the based service is running on the server file:
 ```
 //check if activeMQ is up and running (micro service)
