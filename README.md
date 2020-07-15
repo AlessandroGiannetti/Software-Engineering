@@ -19,6 +19,20 @@
 
 # Docker micro services
 1. if use microservices put 0.0.0.0 on the server ip configuration.
+```
+public class Server {
+
+    public static void main(String args[]) throws InterruptedException {
+        WSImpl implementor = new WSImpl();
+        String address = "http://0.0.0.0:8080/WSInterface";
+        Endpoint.publish(address, implementor);
+        while(true) {}
+        //Thread.sleep(60 * 1000);
+        //System.exit(0);
+    }
+}
+
+```
 ## docker-compose.yml
 ```
 version: '3'
@@ -51,9 +65,11 @@ ENTRYPOINT ["java", "-cp", "4-SOAP-WebService-1.0.jar", "it.sapienza.softeng.soa
 
 # IF multiple SERVICES on multiple container 
 look *docker/JSM* folder AND *03B-JMSServant-microService*.
+
 we must modify the logical address like:
-* props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
-* props.setProperty(Context.PROVIDER_URL, "tcp://broker:61616");
+* FROM props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
+* TO props.setProperty(Context.PROVIDER_URL, "tcp://broker:61616");
+
 and verify if the based service is running on the server file:
 ```
 //check if activeMQ is up and running (micro service)
