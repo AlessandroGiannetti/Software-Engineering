@@ -19,6 +19,20 @@
 
 # Docker micro services
 1. if use microservices put 0.0.0.0 on the server ip configuration.
+```
+public class Server {
+
+    public static void main(String args[]) throws InterruptedException {
+        WSImpl implementor = new WSImpl();
+        String address = "http://0.0.0.0:8080/WSInterface";
+        Endpoint.publish(address, implementor);
+        while(true) {}
+        //Thread.sleep(60 * 1000);
+        //System.exit(0);
+    }
+}
+
+```
 ## docker-compose.yml
 ```
 version: '3'
