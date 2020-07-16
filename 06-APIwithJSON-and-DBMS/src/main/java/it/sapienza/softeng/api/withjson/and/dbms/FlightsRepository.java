@@ -117,6 +117,7 @@ public class FlightsRepository {
         PreparedStatement stat = null;
         PreparedStatement stat2 = null;
         Flight fl = null;
+        Passenger passenger = null;
 
         try {
             stat = conn.prepareStatement("select * from flight where id = ?");
@@ -135,7 +136,12 @@ public class FlightsRepository {
                     fl.setId(Integer.parseInt(rs.getString("id")));
                     fl.setName(rs.getString("name"));
                     while (passengerRes.next()) {
-                        fl.addPassenger(new Passenger(Integer.parseInt(passengerRes.getString("id")), passengerRes.getString("name"), Integer.parseInt(passengerRes.getString("flightID"))));
+                        passenger = new Passenger();
+                        passenger.setId(Integer.parseInt(passengerRes.getString("id")));
+                        passenger.setName(passengerRes.getString("name"));
+                        passenger.setFlightID(Integer.parseInt(passengerRes.getString("flightID")));
+
+                        fl.addPassenger(passenger);
                     }
                     Logger.getLogger(FlightsRepository.class.getName()).log(Level.INFO, "Accessed : " + fl + fl.getPassengers());
                     rs.close();
@@ -162,7 +168,7 @@ public class FlightsRepository {
 
     private Passenger findPassengerByFlightId(int flightId, int passengerId) {
         PreparedStatement stat = null;
-        Passenger passenger = null;
+        Passenger passenger2 = null;
 
         try {
             stat = conn.prepareStatement("select * from passenger where flightID = ? AND id = ?");
@@ -172,10 +178,12 @@ public class FlightsRepository {
             ResultSet rs = stat.executeQuery();
 
             if (rs.next()) {
+                passenger2 = new Passenger();
+                passenger2.setId(Integer.parseInt(rs.getString("id")));
+                passenger2.setName(rs.getString("name"));
+                passenger2.setFlightID(Integer.parseInt(rs.getString("flightID")));
 
-                passenger = new Passenger(Integer.parseInt(rs.getString("id")), rs.getString("name"), Integer.parseInt(rs.getString("flightID")));
-
-                Logger.getLogger(FlightsRepository.class.getName()).log(Level.INFO, "Accessed : " + passenger);
+                Logger.getLogger(FlightsRepository.class.getName()).log(Level.INFO, "Accessed : " + passenger2);
                 rs.close();
             }
 
@@ -190,7 +198,7 @@ public class FlightsRepository {
             }
         }
          */
-        return passenger;
+        return passenger2;
     }
 
     private void executeUpdateFlight(int flightId, Flight flight) {

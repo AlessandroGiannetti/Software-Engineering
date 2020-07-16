@@ -18,14 +18,6 @@ public class Passenger {
     private String name;
     private int flightID;
 
-    Passenger(int id, String name, int flightID) {
-        this.id = id;
-        this.name = name;
-        this.flightID = flightID;
-    }
-    
-    Passenger(){}
-
     public int getId() {
         return id;
     }

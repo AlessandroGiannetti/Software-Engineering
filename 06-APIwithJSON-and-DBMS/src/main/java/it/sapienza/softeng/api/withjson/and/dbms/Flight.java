@@ -26,15 +26,6 @@ public class Flight {
     private String name;
     private List<Passenger> passengers = new ArrayList<>();
 
-    public Flight() {
-    }
-
-    public Flight(int id, String name, List<Passenger> passengers) {
-        this.id = id;
-        this.name = name;
-        this.passengers = passengers;
-    }
-
     public int getId() {
         return id;
     }
