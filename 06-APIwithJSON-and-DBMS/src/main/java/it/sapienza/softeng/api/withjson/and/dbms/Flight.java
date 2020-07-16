@@ -19,12 +19,21 @@ import javax.ws.rs.core.Response;
  *
  * @author studente
  */
-@JacksonXmlRootElement(localName = "Fligth")
+@JacksonXmlRootElement(localName = "Flight")
 public class Flight {
 
     private int id;
     private String name;
     private List<Passenger> passengers = new ArrayList<>();
+
+    public Flight() {
+    }
+
+    public Flight(int id, String name, List<Passenger> passengers) {
+        this.id = id;
+        this.name = name;
+        this.passengers = passengers;
+    }
 
     public int getId() {
         return id;
@@ -45,15 +54,15 @@ public class Flight {
     public List<Passenger> getPassengers() {
         return passengers;
     }
-    
-    public void addPassenger(Passenger passenger){
+
+    public void addPassenger(Passenger passenger) {
         this.passengers.add(passenger);
     }
 
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }
-    
+
     @GET
     @Path("{passengerId}")
     public Passenger getPassenger(@PathParam("passengerId") int passengerId) {
@@ -90,7 +99,6 @@ public class Flight {
         }
         return null;
     }
-    
 
     @Override
     public int hashCode() {
@@ -104,7 +112,7 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "fligth " + id + " " + name;
+        return "flight " + id + " " + name;
     }
 
 }

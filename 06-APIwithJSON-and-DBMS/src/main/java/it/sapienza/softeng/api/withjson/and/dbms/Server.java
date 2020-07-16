@@ -26,9 +26,9 @@ public class Server {
         }
 
         JAXRSServerFactoryBean factoryBean = new JAXRSServerFactoryBean();
-        factoryBean.setResourceClasses(FligthsRepository.class);
+        factoryBean.setResourceClasses(FlightsRepository.class);
         
-        FligthsRepository fr = new FligthsRepository();
+        FlightsRepository fr = new FlightsRepository();
         fr.setConnection(args[0]);
        
         factoryBean.setResourceProvider(new SingletonResourceProvider(fr));

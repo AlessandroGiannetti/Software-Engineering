@@ -11,11 +11,9 @@ import java.net.URL;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.OutputStream;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 
 /**
@@ -24,44 +22,58 @@ import org.apache.http.entity.StringEntity;
  */
 public class Client {
 
-    private static final String BASE_URL = "http://localhost:8080/fligths/";
+    private static final String BASE_URL = "http://localhost:8080/flights/";
     private static CloseableHttpClient client;
 
     public static void main(String[] args) throws IOException {
         client = HttpClients.createDefault();
+        // Example GET passenger
+        System.out.println(getPassenger("1", "1"));
 
-        // Example GET
-        
+        // Example GET flight
+        System.out.println(getFlight("1"));
+
+        // Example POST passenger 
+        System.out.println(getFlight("2"));
+        System.out.println("Insert francesco on flight 2");
+        createValidPassenger();
+        System.out.println(getFlight("2"));
+
+        client.close();
+
+    }
+
+    private static Passenger getPassenger(String flightID, String passengerID) throws IOException {
+        final URL url = new URL(BASE_URL + flightID + "/passengers/" + passengerID);
+        final InputStream input = url.openStream();
+
         ObjectMapper mapper = new ObjectMapper();
-        URL url = new URL(BASE_URL + "2");
-        
-        InputStream input = url.openStream();
-        
-        Fligth fl = (Fligth)mapper.readValue(input, Fligth.class);        
-        System.out.println(fl);
-        
+        Passenger pass = (Passenger) mapper.readValue(input, Passenger.class);
+        return pass;
+    }
 
-        // Example POST/PUT
-        
-        ObjectMapper objectMapper = new ObjectMapper();
-        Fligth newFl = new Fligth();
-        
-        newFl.setId(4);
-        newFl.setName("XX000");
-        
-        String json = objectMapper.writeValueAsString(newFl); 
-        
-        HttpPut httpPut = new HttpPut(BASE_URL + "2/");
-        
+    private static Flight getFlight(String flightID) throws IOException {
+        final URL url = new URL(BASE_URL + flightID);
+        final InputStream input = url.openStream();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Flight fl = (Flight) mapper.readValue(input, Flight.class);
+        return fl;
+    }
+
+    private static void createValidPassenger() throws IOException {
+        final HttpPost httpPost = new HttpPost(BASE_URL + "2/passengers/");
+        Passenger newPass = new Passenger(3, "Francesco", 2);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(newPass);
+
         StringEntity entity = new StringEntity(json);
-        httpPut.setEntity(entity);
-        httpPut.setHeader("Accept", "application/json");
-        httpPut.setHeader("Content-type", "application/json");
-        HttpResponse response = client.execute(httpPut);
+        httpPost.setEntity(entity);
+        httpPost.setHeader("Accept", "application/json");
+        httpPost.setHeader("Content-type", "application/json");
+        HttpResponse response = client.execute(httpPost);
         System.out.println(response);
-        
-        InputStream input2 = url.openStream();
-        fl = (Fligth) mapper.readValue(input2, Fligth.class);
-        System.out.println(fl);
+
     }
 }

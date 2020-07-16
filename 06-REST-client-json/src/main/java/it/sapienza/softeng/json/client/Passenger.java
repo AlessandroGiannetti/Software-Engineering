@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.sapienza.softeng.api.withjson.and.dbms;
+package it.sapienza.softeng.json.client;
 
 /**
  *
@@ -23,8 +23,9 @@ public class Passenger {
         this.name = name;
         this.flightID = flightID;
     }
-    
-    Passenger(){}
+
+    Passenger() {
+    }
 
     public int getId() {
         return id;
@@ -62,6 +63,6 @@ public class Passenger {
 
     @Override
     public String toString() {
-        return "passenger " + id + " " + name;
+        return "passenger: ID:" + id + " Name: " + name + " FlightID: " + flightID;
     }
 }
