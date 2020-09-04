@@ -62,7 +62,7 @@ public class DirectorsRepository {
     @Path("{directorId}/movies/{movieId}")
     @Produces("application/json")
     public Movie pathToMovie(@PathParam("directorId") int directorId, @PathParam("movieId") int movieId) {
-        return null;
+        return findMovieByDirectorIdAndMovieId(directorId,movieId);
     }
 
     private Director findDirectorById(int id) {
@@ -88,11 +88,13 @@ public class DirectorsRepository {
                     director = new Director();
                     director.setId(Integer.parseInt(rs.getString("id")));
                     director.setName(rs.getString("name"));
+                    director.setYear(rs.getString("yearOfBirth"));
                     while (moviesRes.next()) {
                         movie = new Movie();
                         movie.setID(moviesRes.getString("id"));
-                        movie.setTitle(moviesRes.getString("name"));
-                        movie.setDirectorID(moviesRes.getString("flightID"));
+                        movie.setTitle(moviesRes.getString("title"));
+                        movie.setYear(moviesRes.getString("year"));
+                        movie.setDirectorID(moviesRes.getString("directorID"));
 
                         director.addMovie(movie);
                     }
@@ -110,6 +112,32 @@ public class DirectorsRepository {
         }
 
         return director;
+    }
+
+    private Movie findMovieByDirectorIdAndMovieId(int directorId, int movieId) {
+
+        PreparedStatement stat = null;
+        PreparedStatement stat2 = null;
+        Director director = null;
+        Movie movie = null;
+        try {
+            stat2 = conn.prepareStatement("select * from movies where directorID = ? and movies.id = ?");
+            stat2.setString(1, String.valueOf(directorId));
+            stat2.setString(2, String.valueOf(movieId));
+
+            ResultSet moviesRes = stat2.executeQuery();
+
+            movie = new Movie();
+            movie.setID(moviesRes.getString("id"));
+            movie.setTitle(moviesRes.getString("title"));
+            movie.setYear(moviesRes.getString("year"));
+            movie.setDirectorID(moviesRes.getString("directorID"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DirectorsRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return movie;
     }
 
     private List<Director> getAllDirectors() {
@@ -136,7 +164,7 @@ public class DirectorsRepository {
                     director.setId(Integer.parseInt(directorRs.getString("id")));
                     director.setName(directorRs.getString("name"));
                     director.setYear(directorRs.getString("yearOfBirth"));
-                    
+
                     while (moviesRes.next()) {
                         movie = new Movie();
                         movie.setID(moviesRes.getString("id"));
@@ -148,17 +176,21 @@ public class DirectorsRepository {
                     }
 
                     directors.add(director);
-                    Logger.getLogger(DirectorsRepository.class.getName()).log(Level.INFO, "Accessed : " + director + director.getMovies());
+                    Logger
+                            .getLogger(DirectorsRepository.class
+                                    .getName()).log(Level.INFO, "Accessed : " + director + director.getMovies());
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(DirectorsRepository.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DirectorsRepository.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
             directorRs.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(DirectorsRepository.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DirectorsRepository.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
         return directors;
