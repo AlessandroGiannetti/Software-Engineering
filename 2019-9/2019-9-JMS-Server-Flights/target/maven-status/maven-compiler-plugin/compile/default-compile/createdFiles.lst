@@ -1,3 +1,2 @@
-it\sapienza\jms\server\flights\FlightProductor.class
-it\sapienza\jms\server\flights\Server.class
-.netbeans_automatic_build
+it\sapienza\softeng\flights\Server.class
+it\sapienza\softeng\flights\FlightProductor.class
